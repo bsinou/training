@@ -1,10 +1,14 @@
 package net.sinou.hackerrank.drafts.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -32,5 +36,20 @@ public class OneDArrayGameTest {
 	@Test
 	public void test() {
 		assertEquals("Result", result, OneDArrayGame.canWin(leap, array));
+	}
+
+	@Test
+	public void optionalTest() {
+		// disables this test on Linux system
+		Assume.assumeFalse(System.getProperty("os.name").contains("Linux"));
+	}
+
+	@Test
+	@Ignore
+	public void failMethod() {
+		// would make the test fail without the @Ignore annotation
+		assertTrue(false);
+		// Force implementation of the test
+		fail("unimplemented test");
 	}
 }

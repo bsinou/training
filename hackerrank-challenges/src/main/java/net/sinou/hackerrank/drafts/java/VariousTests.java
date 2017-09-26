@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
@@ -144,4 +145,27 @@ public class VariousTests {
 		}
 	}
 
+	class Prime {
+		Map<Integer, Boolean> primes = new HashMap<>();
+
+		public void checkPrime(int... arr) {
+			StringBuilder builder = new StringBuilder();
+			for (int currNb : arr) {
+				if (primes.containsKey(currNb)) {
+					if (primes.get(currNb))
+						builder.append(currNb + " ");
+				} else {
+					BigInteger bi = new BigInteger(currNb + "");
+					boolean prime = bi.isProbablePrime(1);
+					if (prime)
+						builder.append(currNb + " ");
+					primes.put(currNb, prime);
+				}
+				if (builder.length() > 1)
+					System.out.println(builder.substring(0, builder.length() - 1));
+				else
+					System.out.println();
+			}
+		}
+	}
 }
