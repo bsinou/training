@@ -1,7 +1,9 @@
 package net.sinou.hackerrank.drafts.java;
 
+import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -167,5 +169,22 @@ public class VariousTests {
 					System.out.println();
 			}
 		}
+	}
+
+	static void reflectionBasics() {
+		Class<? extends String> student = new String().getClass();
+		Method[] methods = student.getDeclaredMethods();
+		ArrayList<String> methodList = new ArrayList<>();
+		for (Method method : methods) {
+			methodList.add(method.getName());
+		}
+		Collections.sort(methodList);
+		for (String name : methodList) {
+			System.out.println(name);
+		}
+	}
+
+	public static void main(String[] args) {
+		reflectionBasics();
 	}
 }
