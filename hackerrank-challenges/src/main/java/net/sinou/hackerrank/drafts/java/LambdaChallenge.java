@@ -10,7 +10,7 @@ interface PerformOperation {
 }
 
 class MyMath {
-	public static boolean checker(PerformOperation p, int num) {
+	public boolean checker(PerformOperation p, int num) {
 		return p.check(num);
 	}
 
