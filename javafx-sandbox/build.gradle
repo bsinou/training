@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+      		url "https://plugins.gradle.org/m2/"
+    	}
+    }
+    dependencies {
+    	// manage JavaFx with gradle
+    	// See https://github.com/FibreFoX/javafx-gradle-plugin
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+// Define versions
+ext {
+	springBomVersion='2.0.8.RELEASE'
+	mariaDbClientVersion='2.1.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+// Enables maven like import of the Springframework bom
+apply plugin: "io.spring.dependency-management"
+// Enables javafx plugin
+apply plugin: 'javafx-gradle-plugin'
+
+
+jfx {
+    // minimal requirement for jfxJar-task
+    mainClass = 'SimpleApplication'
+    
+    // minimal requirement for jfxNative-task
+    vendor = 'sinou.net'
+}
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+dependencyManagement {
+  imports {
+        mavenBom "io.spring.platform:platform-bom:$springBomVersion"
+  }
+  
+}
+
+dependencies {
+	
+	compile (
+		// Logging
+		"org.slf4j:slf4j-api",
+    	"ch.qos.logback:logback-classic",
+    	"org.slf4j:jcl-over-slf4j"
+	)
+
+	testCompile (
+		"junit:junit"
+	)
+
+}
+
+
+// Current Jar
+jar {
+    baseName = 'javafx-sandbox'
+    version =  '0.0.1'
+}
